@@ -25,16 +25,16 @@ int main()
 	//割り算
 	x = uniform_int_distribution<>(1, 30)(rand);
 	y = uniform_int_distribution<>(1, 20)(rand);
-	questions[1].q = to_string(x) + "/" + to_string(y);
-	questions[1].a = x / y;
+	questions[1].q = to_string(x * y) + "/" + to_string(y);
+	questions[1].a = x;
 
 	//複雑な式
 	x = uniform_int_distribution<>(1, 100)(rand);
 	y = uniform_int_distribution<>(1, 10)(rand);
 	int z = uniform_int_distribution<>(1, 10)(rand);
 	int w = uniform_int_distribution<>(1, 10)(rand);
-	questions[2].q = to_string(x) + "-(" + to_string(y) + "+" + to_string(z) + ")/" + to_string(w);
-	questions[2].a = x - (y - z) / w;
+	questions[2].q = to_string(x) + "-(" + to_string(y * w) + "+" + to_string(z * w) + ")/" + to_string(w);
+	questions[2].a = x - (y - z);
 
 	cout << "[リクルート試験対策クイズ]\n";
 
