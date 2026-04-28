@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <random>
 using namespace std;
 
@@ -11,7 +12,8 @@ struct Question
 
 int main()
 {
-	Question questions[3];
+	//Question questions[3];
+	vector<Question> questions(3);
 
 	random_device rd;
 	mt19937 rand(rd());
@@ -35,6 +37,12 @@ int main()
 	int w = uniform_int_distribution<>(1, 10)(rand);
 	questions[2].q = to_string(x) + "-(" + to_string(y * w) + "+" + to_string(z * w) + ")/" + to_string(w);
 	questions[2].a = x - (y - z);
+
+	//三角形の面積
+	x = uniform_int_distribution<>(1, 10)(rand);
+	y = uniform_int_distribution<>(1, 5)(rand) * 2;
+	questions.push_back({ "面積" + to_string(x * y / 2) + "cm^2、底辺" + to_string(y) + "cmの三角形の高さを求めよ。", x });
+
 
 	cout << "[リクルート試験対策クイズ]\n";
 
