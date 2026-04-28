@@ -75,7 +75,15 @@ int main()
 	z = gcd(y + 1, 6);
 	questions.push_back({ "サイコロを１個振って、" + to_string(x) + "から" + to_string(x + y) + "が出る確率を求めよ。", to_string((y + 1) / z) + "/" + to_string(6 / z) });
 
-
+	//順列
+	x = uniform_int_distribution<>(3, 7)(rand);
+	y = uniform_int_distribution<>(1, x)(rand);
+	z = 1;
+	for (int i = 0; i < y; i++)
+	{
+		z *= x - i;
+	}
+	questions.push_back({ to_string(x) + "人のうち" + to_string(y) + "人を選んで並べる方法は何通りあるか？", to_string(z) });
 
 	for (const auto& e : questions)
 	{
