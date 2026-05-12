@@ -1,14 +1,9 @@
+#include "question.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <random>
 using namespace std;
-
-struct Question
-{
-	string q;	//–â‘è•¶
-	string a;		//“š‚¦
-};
 
 /// <summary>
 /// Å‘åŒö–ñ”‚ğ‹‚ß‚é
