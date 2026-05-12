@@ -1,4 +1,5 @@
 #include "question.h"
+#include "exam_japanese.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -58,8 +59,6 @@ int main()
 	y = uniform_int_distribution<>(1, 5)(rand) * 3;
 	questions.push_back({ "底面の半径" + to_string(x) + "cm、高さ" + to_string(y) + "cmの円錐がある。\n" + "この円錐の体積をXπcm^3とする。Xの値を求めよ。", to_string(x * x * y / 3) });
 
-	cout << "[リクルート試験対策クイズ]\n";
-
 	//球の体積
 	x = uniform_int_distribution<>(1, 5)(rand) * 3;
 	questions.push_back({ "半径" + to_string(x) + "cmの球がある。\n" + "この球の体積をXπcm^3とする。Xの値を求めよ。", to_string(4 * x * x * x / 3) });
@@ -93,6 +92,15 @@ int main()
 		z /= y - i;	//分母の計算
 	}
 	questions.push_back({ to_string(x) + "人のうち" + to_string(y) + "人を選ぶ組み合わせは何通りあるか？", to_string(z) });
+
+	cout << "[リクルート試験対策クイズ]\n";
+
+	cout << "今日かを選んでください\n１=数学\n２=国語\n";
+	int subject;
+	cin >> subject;
+	if (subject == 2) {
+		questions = CreateKanjiExam();
+	}
 
 	for (const auto& e : questions)
 	{
