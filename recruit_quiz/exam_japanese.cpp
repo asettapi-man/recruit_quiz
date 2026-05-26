@@ -77,3 +77,71 @@ QuestionList CreateKanjiExam()
 
 	return questions;
 }
+
+QuestionList CreateHomophoneExam()
+{
+	const struct {
+		const char* reading;	//読み
+		struct {
+			const char* kanji;		//漢字
+			const char* meaning;	//意味
+		} words[3];
+	} data[] = {
+		{ "じき",{
+			{ "時期", "何かを行うとき、期間"},
+			{ "時機", "物事を行うのに良い機会"}}},
+		{ "そうぞう", {
+			{ "想像", "頭の中で思い描くこと"},
+			{ "創造", "新しいものを作り上げること"}}},
+		{ "ほしょう", {
+			{ "保証", "間違いがなく確かであると約束すること"},
+			{ "保障", "権利や地位などが維持されるように保護し守ること"},
+			{ "補償", "損失を補って償うこと"}}},
+		{ "たいしょう", {
+			{ "対象", "行為の目標となるもの"},
+			{ "対称", "2つの図形や物事が互いにつり合っていること"},
+			{ "対照", "見比べること、違いが際立つこと"}}},
+		{ "あやまる", {
+			{ "謝る", "失敗について許しを求める"},
+			{ "誤る", "間違った判断をする"}}},
+		{ "おさめる", {
+			{ "納める", "金や物を渡すべきところに渡す"},
+			{ "治める", "乱れている物事を落ち着いて穏やかな状態にする"},
+			{ "修める", "行いや人格を正しくする、学問や技芸などを学んで身に着ける"}}},
+	};
+
+	constexpr int quizCount = 5;	//出題数
+	QuestionList questions;
+	questions.reserve(quizCount);
+	const vector<int> indices = CreateRandomIndices(size(data));
+	random_device rd;
+
+	for (int i = 0; i < quizCount; i++)
+	{
+		const auto& e = data[indices[i]];
+
+		//要素数を計算
+		int count = 0;
+		for (; count < size(e.words); count++)
+		{
+			if (!e.words[count].kanji)
+			{
+				break;
+			}
+		}
+
+		//正しい番号を選択
+		const int correctNo = uniform_int_distribution<>(1, count)(rd);
+
+		//問題文を作成
+		const vector<int> answers = CreateRandomIndices(count);
+		string s = "[" + string(e.words[answers[correctNo - 1]].kanji) + "]の意味として正しい番号を選べ";
+		for (int j = 0; j < count; j++)
+		{
+			s += "\n  " + to_string(j + 1) + ":" + e.words[answers[j]].meaning;
+		}
+		questions.push_back({ s, to_string(correctNo) });
+	}
+
+	return questions;
+}
