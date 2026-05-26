@@ -216,3 +216,74 @@ QuestionList CreateAntonyExam()
 	}
 	return questions;
 }
+
+QuestionList CreateSynonymExam()
+{
+	const struct {
+		int count;				//類義語の数
+		const char* kanji[4]; //類義語の漢字
+	} data[] = {
+		{2, "仲介(ちゅうかい)", "斡旋(あっせん)"},
+		{3, "夭逝(ようせい)", "夭折(ようせつ)", "早世(そうせい)"},
+		{3, "交渉(こうしょう)", "折衝(せっしょう)", "協議(きょうぎ)"},
+		{3, "抜群(ばつぐん)", "傑出(けっしゅつ)", "出色(しゅっしょく)"},
+		{4, "熟知(じゅくち)", "通暁(つうぎょう)", "知悉(ちしつ)", "精通(せいつう)"},
+		{2, "沿革(えんかく)", "変遷(へんせん)"},
+		{2, "解雇(かいこ)", "罷免(ひめん)"},
+		{2, "架空(かくう)", "虚構(きょこう)"},
+		{2, "機敏(きびん)", "迅速(じんそく)"},
+		{3, "委細(いさい)", "詳細(しょうさい)", "子細(しさい)"},
+		{3, "丁寧(ていねい)", "慇懃(いんぎん)", "丁重(ていちょう)"},
+		{3, "寄与(きよ)", "貢献(こうけん)", "尽力(じんりょく)"},
+		{3, "危惧(きぐ)", "懸念(けねん)", "憂慮(ゆうりょ)"},
+		{3, "敬服(けいふく)", "感心(かんしん)", "感銘(かんめい)"},
+		{3, "堅持(けんじ)", "固執(こしつ)", "墨守(ぼくしゅ)"},
+	};
+
+	constexpr int quizCount = 5;	//出題数
+	QuestionList questions;
+	questions.reserve(quizCount);
+	const vector<int> indices = CreateRandomIndices(size(data));
+	random_device rd;
+
+	for (int i = 0; i < quizCount; i++)
+	{
+		//間違った番号をランダムに選ぶ
+		const int correctIndex = indices[i];
+		vector<int> answers = CreateWrongIndices(size(data), correctIndex);
+
+		//ランダムな位置を正しい番号で上書き
+		const int correctNo = uniform_int_distribution<>(1, 4)(rd);
+		answers[correctNo - 1] = correctIndex;
+
+		//出題する類義語を選択
+		const auto& e = data[indices[i]];
+		const int object = uniform_int_distribution<>(0, e.count - 1)(rd);
+
+		//問題文を作成
+		string s = "[" + string(data[correctIndex].kanji[object]) + "]の類義語として正しい番号を選べ";
+		for (int j = 0; j < 4; j++)
+		{
+			if (j == correctNo - 1)
+			{
+				//出題する語「以外」の類義語を正解として選択
+				int other = uniform_int_distribution<>(0, e.count - 2)(rd);
+				if (other >= object)
+				{
+					other++;	//出題する語の番号を飛ばす
+				}
+				s += "\n  " + to_string(j + 1) + ":" + e.kanji[other];
+			}
+			else
+			{
+				//誤答を選択
+				const auto& f = data[answers[j]];
+				const int k = uniform_int_distribution<>(0, f.count - 1)(rd);
+				s += "\n  " + to_string(j + 1) + ":" + f.kanji[k];
+			}
+		}
+
+		questions.push_back({ s, to_string(correctNo) });
+	}
+	return questions;
+}
