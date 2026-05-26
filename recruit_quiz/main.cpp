@@ -100,8 +100,8 @@ int main()
 	cin >> subject;
 	if (subject == 2) {
 		questions = CreateKanjiExam();
-		//QuestionList idioExam = CreateIdiomExam();
-		//questions.insert(questions.end(), idioExam.begin(), idioExam.end());
+		QuestionList idioExam = CreateIdiomExam();
+		questions.insert(questions.end(), idioExam.begin(), idioExam.end());
 		QuestionList homophoneExam = CreateHomophoneExam();
 		questions.insert(questions.end(), homophoneExam.begin(), homophoneExam.end());
 		QuestionList antonyExam = CreateAntonyExam();
