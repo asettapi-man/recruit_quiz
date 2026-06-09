@@ -1,5 +1,6 @@
 #include "question.h"
 #include "exam_japanese.h"
+#include "exam_english.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -95,7 +96,7 @@ int main()
 
 	cout << "[ƒŠƒNƒ‹[ƒgŽŽŒ±‘ÎôƒNƒCƒY]\n";
 
-	cout << "¡“ú‚©‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n";
+	cout << "¡“ú‚©‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n‚R=‰pŒê\n";
 	int subject;
 	cin >> subject;
 	if (subject == 2) {
@@ -108,6 +109,9 @@ int main()
 		questions.insert(questions.end(), antonyExam.begin(), antonyExam.end());
 		QuestionList synonymExam = CreateSynonymExam();
 		questions.insert(questions.end(), synonymExam.begin(), synonymExam.end());
+	}
+	else if (subject == 3) {
+		questions = CreateEnglishWordExam();
 	}
 
 	for (const auto& e : questions)

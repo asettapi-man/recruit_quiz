@@ -191,6 +191,7 @@ QuestionList CreateHomophoneExam()
 		int count = 0;
 		for (; count < size(e.words); count++)
 		{
+			//—v‘f‚ª‹ó‚È‚çI—¹
 			if (!e.words[count].kanji)
 			{
 				break;
