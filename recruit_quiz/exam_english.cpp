@@ -23,6 +23,22 @@ QuestionList CreateEnglishWordExam()
 		{ "infrastructure", "インフラストラクチャ", "下部構造、基盤となる施設や設備"},
 		{ "knowledge", "ナレッジ", "知識"},
 		{ "credit", "クレジット", "信用"},
+		{ "routine", "ルーティン", "決まった手順、日課"},
+		{ "management", "マネジメント", "管理、経営"},
+		{ "account", "アカウント", "会計、口座"},
+		{ "unique", "ユニーク", "他に類を見ない、個性的な"},
+		{ "variety", "バラエティ", "変化に富む、多様な"},
+		{ "schedule", "スケジュール", "予定、計画"},
+		{ "agenda", "アジェンダ", "課題、議題"},
+		{ "technology", "テクノロジー", "科学技術"},
+		{ "collaboration", "コラボレーション", "協力、共同事業、共同作業"},
+		{ "tax", "タックス", "税金"},
+		{ "stock", "ストック", "在庫、株式"},
+		{ "product", "プロダクト", "製品"},
+		{ "booking", "ブッキング", "予約、帳簿への記入"},
+		{ "weight", "ウェイト", "重さ"},
+		{ "compliance", "法令・社会的規範を守る"},
+		{ "receipt", "レシート", "領収書"},
 	};
 
 	constexpr int quizCount = 5;	//出題数
