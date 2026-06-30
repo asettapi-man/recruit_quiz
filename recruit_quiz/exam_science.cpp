@@ -32,5 +32,36 @@ QuestionList CreatePhysicsExam()
 		to_string(v) });
 	}	//等速直線運動
 
+	{ // 等加速度直線運動
+		// 公式: v = v0 + at を使って解く問題
+		int v0 = uniform_int_distribution<>(1, 10)(rd); // 初速
+		int a = uniform_int_distribution<>(1, 5)(rd);   // 加速度
+		int t = uniform_int_distribution<>(1, 20)(rd);  // 移動時間
+		questions.push_back({
+		"秒速" + to_string(v0) + "kmで移動していた車が、進行方向に大きさ" + to_string(a) +
+		"km/s^2で等加速度直線運動をはじめた。\n" + to_string(t) + "秒後の速度をm/s単位で求めよ。",
+		to_string(v0 + a * t) });
+
+		// 公式: x = v0t + 1/2*at^2 を使って解く問題
+		v0 = uniform_int_distribution<>(5, 20)(rd);   // 初速
+		a = uniform_int_distribution<>(1, 5)(rd) * 2; // 加速度
+		t = uniform_int_distribution<>(1, 10)(rd);    // 移動時間
+		questions.push_back({
+		"秒速" + to_string(v0) + "で移動していた車が、進行方向に大きさ" + to_string(a) +
+		"km/sで等加速度直線運動をはじめた。\n加速を始めてから" + to_string(t) +
+		"秒後までに移動した距離をm単位で求めよ。",
+		to_string(v0 * t + a * t * t / 2) });
+
+		// 公式: v^2 - v0^2 = 2ax を使って解く問題
+		a = -uniform_int_distribution<>(1, 5)(rd) * 2; // 加速度
+		t = uniform_int_distribution<>(1, 10)(rd);     // 移動時間
+		v0 = -a * t; // 初速
+		questions.push_back({
+		"秒速" + to_string(v0) + "mで移動していた車がブレーキをかけたところ、" +
+		to_string(v0 * t + a * t * t / 2) + "m進んで停止した。\n" +
+		"ブレーキの加速度をm/s^2単位で求めよ。",
+		to_string(a) });
+	}	//等加速度直線運動
+
 	return questions;
 }
