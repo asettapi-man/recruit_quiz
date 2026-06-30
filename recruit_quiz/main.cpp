@@ -97,7 +97,7 @@ int main()
 
 	cout << "[ƒŠƒNƒ‹[ƒgŒ±‘ÎôƒNƒCƒY]\n";
 
-	cout << "¡“ú‚©‚ğ‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n‚R=‰pŒê\n ‚S=—‰È\n";
+	cout << "¡“ú‚©‚ğ‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n‚R=‰pŒê\n‚S=—‰È\n";
 	int subject;
 	cin >> subject;
 	if (subject == 2) {
