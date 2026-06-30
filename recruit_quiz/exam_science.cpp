@@ -63,5 +63,44 @@ QuestionList CreatePhysicsExam()
 		to_string(a) });
 	}	//等加速度直線運動
 
+	{	//重力加速度
+		int t = uniform_int_distribution<>(1, 10)(rd);	//移動時間
+		int x = 98 * t * t / 2;	//10倍することで、小数点以下第１位までを整数として表す
+		string answer = to_string(x / 10);	//整数部を文字列化
+		if (x % 10)
+		{
+			//小数部がある場合は小数部を文字列化
+			answer += '.';
+			answer += '0' + x % 10;
+		}
+		questions.push_back({
+			"重力加速度を9.8m/s^2とする。\n十分に高い位置から物体を静かに落とすと、物体は" +
+			to_string(t) + "秒間でXm落下する。\n" +
+			"Xの値を小数点以下第1位まで求めよ(空気抵抗はないものとする)。",
+			answer });
+
+		int v0 = uniform_int_distribution<>(1, 10)(rd);	//初速
+		t = uniform_int_distribution<>(1, 10)(rd);	//移動時間
+		int v = v0 * 10 - 98 * t;	//速度
+		answer.clear();
+		if (v < 0)
+		{
+			v = -v;
+			answer = '-';
+		}
+		answer += to_string(v / 10);
+		if (v % 10)
+		{
+			answer += '.';
+			answer += '0' + v % 10;
+		}
+		questions.push_back({
+			"重力加速度を9.8m/s^2とする。\n初速" + to_string(v0) +
+			"m/sで物体を鉛直に投げ上げたとき、" + to_string(t) +
+			"秒後の物体の速度はXm/sである。\n" +
+			"Xの値を小数点以下第1位まで求めよ(空気抵抗はないものとする)。",
+			answer });
+	}	//重力加速度
+
 	return questions;
 }
