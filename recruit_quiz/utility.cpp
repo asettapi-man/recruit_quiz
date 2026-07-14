@@ -53,3 +53,27 @@ std::vector<int> CreateWrongIndices(int n, int correctIndex)
 
 	return indices;
 }
+
+//文字列を分割する関数
+vector<string> Split(const string& s, char c)
+{
+	vector<string> v;	//分割した文字列を格納配列（戻り値）
+
+	//全ての文字列をループ処理
+	auto begin = s.begin();	//分割範囲の先頭位置
+	const auto end = s.end();	//文字列の終端
+	for (auto p = begin; p != end; ++p)
+	{
+		//区切り文字の前までを文字列を分割
+		if (*p == c)
+		{
+			v.push_back(string(begin, p));	//分割した文字列を配列に格納
+			begin = p + 1;	//次の分割範囲の先頭位置を更新
+		}
+	}
+
+	//残りの部分を配列に追加
+	v.push_back(string(begin, end));
+
+	return v;
+}
