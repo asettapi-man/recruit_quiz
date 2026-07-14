@@ -2,6 +2,7 @@
 #include "exam_japanese.h"
 #include "exam_english.h"
 #include "exam_science.h"
+#include "exam_geography.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -97,7 +98,7 @@ int main()
 
 	cout << "[ƒŠƒNƒ‹[ƒgŽŽŒ±‘ÎôƒNƒCƒY]\n";
 
-	cout << "¡“ú‚©‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n‚R=‰pŒê\n‚S=—‰È\n";
+	cout << "¡“ú‚©‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢\n‚P=”Šw\n‚Q=‘Œê\n‚R=‰pŒê\n‚S=—‰È\n‚T=’n—\n";
 	int subject;
 	cin >> subject;
 	if (subject == 2) {
@@ -119,6 +120,10 @@ int main()
 	else if (subject == 4)
 	{
 		questions = CreatePhysicsExam();
+	}
+	else if (subject == 5)
+	{
+		questions = CreatePrefecturesExam();
 	}
 
 	for (const auto& e : questions)
