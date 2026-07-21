@@ -1,4 +1,5 @@
 #include "question.h"
+#include "utility.h"
 #include "exam_japanese.h"
 #include "exam_english.h"
 #include "exam_science.h"
@@ -137,6 +138,13 @@ int main()
 
 		string answer;
 		cin >> answer;
+
+		// •ÏŠ·‚ª¬Œ÷‚µ‚½ê‡‚ÍASCII•¶š—ñ‚É’u‚«Š·‚¦‚é
+		string ascii = ConvertSjisNumberToAscii(answer);
+		if (!ascii.empty())
+		{
+			answer = ascii;
+		}
 
 		if (answer == e.a)
 		{

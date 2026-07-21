@@ -20,3 +20,10 @@ std::vector<int> CreateWrongIndices(int n, int correctIndex);
 /// <param name="c">区切り文字</param>
 /// <returns>文字列が分割されたものが返る</returns>
 std::vector<std::string> Split(const std::string& s, char c);
+
+/// <summary>
+/// SJIS数値文字列をASCII数値文字列に変換する
+/// </summary>
+/// <param name="sjis">変換元のsjis文字列</param>
+/// <returns>SJIS数値文字列をASCII数値文字列に変換されたものが返る</returns>
+std::string ConvertSjisNumberToAscii(const std::string& sjis);
