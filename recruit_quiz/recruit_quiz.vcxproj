@@ -130,6 +130,7 @@
     <ClCompile Include="exam_english.cpp" />
     <ClCompile Include="exam_geography.cpp" />
     <ClCompile Include="exam_japanese.cpp" />
+    <ClCompile Include="exam_politics.cpp" />
     <ClCompile Include="exam_science.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utility.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="exam_english.h" />
     <ClInclude Include="exam_geography.h" />
     <ClInclude Include="exam_japanese.h" />
+    <ClInclude Include="exam_politics.h" />
     <ClInclude Include="exam_science.h" />
     <ClInclude Include="question.h" />
     <ClInclude Include="utility.h" />
