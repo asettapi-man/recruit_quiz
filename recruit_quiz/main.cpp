@@ -25,15 +25,7 @@ int main()
 		questions = CreateMathematicsExam();
 	}
 	else if (subject == 2) {
-		questions = CreateKanjiExam();
-		QuestionList idioExam = CreateIdiomExam();
-		questions.insert(questions.end(), idioExam.begin(), idioExam.end());
-		QuestionList homophoneExam = CreateHomophoneExam();
-		questions.insert(questions.end(), homophoneExam.begin(), homophoneExam.end());
-		QuestionList antonyExam = CreateAntonyExam();
-		questions.insert(questions.end(), antonyExam.begin(), antonyExam.end());
-		QuestionList synonymExam = CreateSynonymExam();
-		questions.insert(questions.end(), synonymExam.begin(), synonymExam.end());
+		questions = CreateJapaneseExam();
 	}
 	else if (subject == 3) {
 		questions = CreateEnglishWordExam();
