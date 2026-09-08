@@ -6,6 +6,7 @@
 #include "exam_geography.h"
 #include "exam_politics.h"
 #include "exam_mathematics.h"
+#include "exam_economics.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,17 +28,18 @@ int main()
 		{"英語", CreateEnglishExam},
 		{"理科", CreatePhysicsExam},
 		{"地理", CreatePrefecturesExam},
-		{"政治", CreatePoliticsExam}
+		{"政治", CreatePoliticsExam},
+		{"経済", CreateEconomicsExam},
 	};
 
 	vector<Question> questions(3);
 
-	cout << "[リクルート試験対策クイズ]\n";
+	std::cout << "[リクルート試験対策クイズ]\n";
 
-	cout << "教科を選んでください\n";
+	std::cout << "教科を選んでください\n";
 	for (int i = 0; i < size(subjectData); i++)
 	{
-		cout << i + 1 << "=" << subjectData[i].name << "\n";
+		std::cout << i + 1 << "=" << subjectData[i].name << "\n";
 	}
 
 	vector<int> questionCounts(size(subjectData));	//各教科の問題数
@@ -65,7 +67,7 @@ int main()
 
 	for (const auto& e : questions)
 	{
-		cout << e.q << "\n";
+		std::cout << e.q << "\n";
 
 		string answer;
 		cin >> answer;
@@ -79,15 +81,36 @@ int main()
 
 		if (answer == e.a)
 		{
-			cout << "正解！\n";
+			std::cout << "正解！\n";
 			correctCounts[currentSubjectNo]++;
 		}
-		else
-		{
-			cout << "間違い！正解は" << e.a << "\n";
+		else if (e.b.empty()) {
+			// 答えがひとつだけの場合
+			//回答済み問題数が教科の問題数以上になったら、次の教科に進む
+			std::cout << "間違い！ 正解は" << e.a << "\n";
 		}
-
-		//回答済み問題数が教科の問題数以上になったら、次の教科に進む
+		else {
+			// 答えが複数ある場合、いずれかと一致すれば正解とする
+			bool isMatch = false;
+			for (const auto& b : e.b) {
+				if (answer == b) {
+					isMatch = true; // 一致する答えが見つかった
+					break;
+				}
+			}
+			// 比較結果を出力
+			if (isMatch) {
+				std::cout << "正解！\n";
+			}
+			else {
+				std::cout << "間違い！　正解は" << e.a << "(または";
+				for (auto& b : e.b) {
+					std::cout << "、" << b;
+				}
+				std::cout << ")\n";
+				
+			}
+		} // if answer == e.a
 		if (subject == 0)
 		{
 			currentAnsweredCount++;	//回答済み問題数をカウント
@@ -100,20 +123,20 @@ int main()
 	}	//for questions <- for文の閉じカッコを分かりやすくするためのもの
 
 	//成績を表示
-	cout << "\n- - - 成績 - - -\n";
+	std::cout << "\n- - - 成績 - - -\n";
 	if (subject > 0 && subject <= size(subjectData))
 	{
-		cout << subjectData[subject - 1].name << "：" << correctCounts[0] << "/" << questions.size() << "\n";
+		std::cout << subjectData[subject - 1].name << "：" << correctCounts[0] << "/" << questions.size() << "\n";
 	}
 	else if (subject == 0)
 	{
 		size_t totalCorrect = 0;	//総合正解数
 		for (int i = 0; i < size(subjectData); i++)
 		{
-			cout << subjectData[i].name << "：" << correctCounts[i] << "/" << questionCounts[i] << "\n";
+			std::cout << subjectData[i].name << "：" << correctCounts[i] << "/" << questionCounts[i] << "\n";
 			totalCorrect += correctCounts[i];
 		}
-		cout << "合計 : " << totalCorrect << "/" << questions.size() << "\n";
+		std::cout << "合計 : " << totalCorrect << "/" << questions.size() << "\n";
 	}
 
 	//成績をファイルに出力する
@@ -149,7 +172,7 @@ int main()
 				}
 			}
 			ofs << "\n";
-			cout << "成績を" << filename << "に出力しました\n";
+			std::cout << "成績を" << filename << "に出力しました\n";
 		}
 		else if (subject == 0)
 		{
@@ -160,8 +183,7 @@ int main()
 				ofs << "," << correctCounts[i] << '/' << questionCounts[i];
 			}
 			ofs << "\n";
-			cout << "成績を" << filename << "に出力しました\n";
+			std::cout << "成績を" << filename << "に出力しました\n";
 		}
-
 	}	//if !ofs
 }
